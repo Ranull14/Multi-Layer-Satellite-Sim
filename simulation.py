@@ -1,12 +1,12 @@
 #
 #   PROJECT : Satellite Network Simulation
-# 
+#
 #   FILENAME : simulation.py
-# 
+#
 #   DESCRIPTION :
-#       Simulate a network of satellite nodes to compare performance 
+#       Simulate a network of satellite nodes to compare performance
 #       compared to regular ground nodes.
-# 
+#
 #   FUNCTIONS :
 #       Satellite.Satellite()
 #       Satellite.draw()
@@ -15,15 +15,15 @@
 #       GroundStation.GroundStation()
 #       GroundStation.draw()
 #       GroundStation.get_position()
-# 
+#
 #   NOTES :
 #       - ...
-# 
+#
 #   AUTHOR(S) : Noah Arcand Da Silva    START DATE : 2022.11.26 (YYYY.MM.DD)
 #
 #   CHANGES :
 #       - ...
-# 
+#
 #   VERSION     DATE        WHO             DETAILS
 #   0.0.1a      2022.11.26  Noah            Creation of project.
 #   0.0.2a      2023.01.09  Noah            Basic simulation of LEO satellite constellation.
@@ -33,7 +33,7 @@
 #   0.1.1a      2023.01.22  Noah            Allows to run multiple endpoint pairs at once (not recommended).
 #
 
-from math import sin, pi, radians, asin
+from math import sin, pi, radians, log
 import pygame
 
 from constants import *
@@ -62,14 +62,16 @@ class Satellite:
 
     def update_position(self):
         # Get program tickrate/clockspeed to calculate our positional values
-        self.time = (pygame.time.get_ticks() + self.delay) / WINDOW_WIDTH * SATELLITE_SPEED
+        self.time = (pygame.time.get_ticks() + self.delay) / \
+            WINDOW_WIDTH * SATELLITE_SPEED
         # Set the x-coordinate to be the time value with WINDOW_WIDTH modulus to get a prevent x-coordinate from going over WINDOW_WIDTH value
         self.x = self.time % WINDOW_WIDTH
         # Utilize the sinwave formula to get y-coordinate, using an offset of 'WINDOW_HEIGHT / 2' to center the y-coordinate on the screen
-        self.y = int(AMPLITUDE * sin(2 * pi * FREQUENCY * self.time + radians(self.phase))) + WINDOW_HEIGHT / 2
+        self.y = int(AMPLITUDE * sin(2 * pi * FREQUENCY *
+                     self.time + radians(self.phase))) + WINDOW_HEIGHT / 2
 
     def get_position(self):
-        return (self.x, self.y) # Return position pair for current satellite
+        return (self.x, self.y)  # Return position pair for current satellite
     '''
     def draw(self, screen):
         x = self.x
@@ -113,6 +115,7 @@ class Satellite:
 
         self.orbit.append((self.x, self.y))
     '''
+
 
 class GroundStation:
     def __init__(self, x=WINDOW_WIDTH/2, y=WINDOW_HEIGHT/2):

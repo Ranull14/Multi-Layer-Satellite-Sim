@@ -51,13 +51,13 @@ EARTH_MESOSPHERE = 85   # km
 
 # Starlink v2.0
 ORBIT_HEIGHT = 550
-TIME_TO_COMPLETE_ORBIT = 60    # minutes (seconds for simulation)
+TIME_TO_COMPLETE_ORBIT = 120    # minutes (seconds for simulation)
 SATELLITE_MASS = 1250
 
 # Sin wave data
 # Ensures a constellation that will never loop on itself. (frequency = 0.0007222222222222223)
 FREQUENCY = 1 / (WINDOW_WIDTH / (1.3))
 AMPLITUDE = WINDOW_HEIGHT / 2 - WINDOW_WIDTH / 10
-SATELLITE_SPEED = cos(WINDOW_WIDTH) * (WINDOW_WIDTH) / \
-    TIME_TO_COMPLETE_ORBIT
+satSpeed1 = WINDOW_WIDTH / cos(TIME_TO_COMPLETE_ORBIT * WINDOW_WIDTH)
+SATELLITE_SPEED = WINDOW_WIDTH / cos(TIME_TO_COMPLETE_ORBIT * WINDOW_WIDTH)
 MAX_SATELLITE_COUNT = 600
